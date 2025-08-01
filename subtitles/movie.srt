@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:05,000
+Hello, welcome to our movie.
+
+2
+00:00:35,000 --> 00:00:40,000
+This is a scene with a long gap before it.
+
+3
+00:01:10,000 --> 00:01:15,000
+Another scene after another gap.
+
+4
+00:01:45,000 --> 00:01:50,000
+Continuing the story.
+
+5
+00:02:20,000 --> 00:02:25,000
+More dialogue after a break.
+
+6
+00:02:55,000 --> 00:03:00,000
+Final scene with another gap. 
