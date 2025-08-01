@@ -1,171 +1,141 @@
-# Plot Hole Plotter
+# 🍿 Plot Hole Plotter
 
-A sophisticated tool for analyzing things that don't need analyzing. Guaranteed to waste your time in the most professional way possible! 🎉
+A smart application that analyzes SRT subtitle files to find ideal break times in movies using subtitle gaps (>30s).
 
-## Features
+## 🚀 Features
 
-- **Useless Subtitle Analysis**: Discover completely meaningless insights about subtitle timing, fonts, and synchronization
-- **Pointless Audio Analysis**: Analyze audio frequencies, silence patterns, and background noise with zero practical value
-- **Professional UI**: Beautiful, modern interface built with Next.js and Tailwind CSS
-- **FastAPI Backend**: Robust API for serving completely useless data
-- **Real-time Search**: Search through meaningless data with instant results
+- **Break Time Analysis**: Automatically finds gaps longer than 30 seconds in subtitle files
+- **Beautiful UI**: Modern Next.js frontend with Tailwind CSS
+- **FastAPI Backend**: Robust Python backend for SRT file processing
+- **Local File Support**: Works with SRT files on your local system
+- **Real-time Analysis**: Processes SRT files and shows results immediately
 
-## Project Structure
+## 🏗️ Project Structure
 
 ```
 plot-hole-plotter/
-├── backend/                      # FastAPI backend
-│   └── main.py                  # Main API server
-├── frontend/                    # Next.js frontend
-│   ├── app/
-│   │   ├── page.js             # Home page with search interface
-│   │   ├── layout.js           # Global layout
-│   │   └── globals.css         # Global styles
-│   ├── components/
-│   │   └── ui/                 # Reusable UI components
-│   ├── lib/
-│   │   └── api.js              # API client functions
-│   ├── package.json            # Frontend dependencies
-│   ├── tailwind.config.js      # Tailwind CSS config
-│   └── next.config.js          # Next.js config
-└── README.md                   # This file
+├── backend/
+│   ├── main.py              # FastAPI application
+│   └── subtitles/movie.srt  # Sample SRT file
+├── frontend/
+│   ├── app/                 # Next.js app directory
+│   ├── components/          # UI components
+│   ├── lib/                # Utility functions
+│   └── package.json        # Frontend dependencies
+├── requirements.txt         # Python dependencies
+├── render.yaml             # Render deployment config
+└── README.md              # This file
 ```
 
-## Quick Start
+## 🛠️ Local Development
 
 ### Prerequisites
-
-- Node.js 18+ 
 - Python 3.8+
-- pip (Python package manager)
+- Node.js 18+
+- npm or yarn
 
 ### Backend Setup
-
-1. Navigate to the backend directory:
-   ```bash
-   cd plot-hole-plotter/backend
-   ```
-
-2. Install Python dependencies:
-   ```bash
-   pip install fastapi uvicorn pydantic
-   ```
-
-3. Start the FastAPI server:
-   ```bash
-   python main.py
-   ```
-
-The backend will be available at `http://localhost:8000`
+```bash
+cd plot-hole-plotter/backend
+pip install -r ../requirements.txt
+python main.py
+```
 
 ### Frontend Setup
+```bash
+cd plot-hole-plotter/frontend
+npm install
+npm run dev
+```
 
-1. Navigate to the frontend directory:
-   ```bash
-   cd plot-hole-plotter/frontend
-   ```
+### Access the Application
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8000
 
-2. Install Node.js dependencies:
-   ```bash
-   npm install
-   ```
+## 🌐 Deployment
 
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+### Render Deployment
 
-The frontend will be available at `http://localhost:3000`
+This project is configured for easy deployment on Render:
 
-## API Endpoints
+1. **Fork/Clone** this repository
+2. **Connect** to your Render account
+3. **Create a new Web Service**
+4. **Point to this repository**
+5. **Deploy** automatically
 
-### `GET /`
-Health check endpoint
+The `render.yaml` file contains the deployment configuration:
+- **Build Command**: `pip install -r requirements.txt`
+- **Start Command**: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
+- **Environment**: Python 3.13.4
 
-### `GET /health`
-API health status
+### Environment Variables
+- `PORT`: Automatically set by Render
+- `PYTHON_VERSION`: 3.13.4
 
-### `POST /api/search`
-Search for useless subtitle and audio analysis data
+## 📖 API Endpoints
 
-**Request Body:**
+### Backend API (FastAPI)
+
+- `GET /` - Health check
+- `GET /health` - API status
+- `POST /api/analyze-srt` - Analyze SRT file for break opportunities
+- `GET /api/random-plot-hole` - Get random break opportunity example
+
+### Request Format
 ```json
 {
-  "query": "silence analysis"
+  "filePath": "path/to/your/movie.srt"
 }
 ```
 
-**Response:**
+### Response Format
 ```json
 {
-  "query": "silence analysis",
-  "results": [
+  "fileName": "movie.srt",
+  "totalSubtitles": 150,
+  "analysisTime": 2.5,
+  "breakOpportunities": [
     {
-      "id": 1,
-      "text": "The sound of silence at 2:34 - completely meaningless",
-      "relevance": 85,
-      "uselessness": 95,
-      "source": "subtitle_analysis_42.txt"
+      "start": "0:15:30.000",
+      "duration": 45,
+      "duration_formatted": "45s"
     }
   ],
-  "total_results": 1
+  "totalGaps": 3,
+  "totalBreakTime": 255
 }
 ```
 
-### `GET /api/random-useless-fact`
-Get a random useless fact about subtitles or audio
+## 🎯 How It Works
 
-**Response:**
-```json
-{
-  "fact": "The average subtitle contains 42% more words than necessary",
-  "confidence": 87,
-  "source": "completely_made_up_research.txt"
-}
-```
+1. **Upload SRT File**: Enter the path to your SRT subtitle file
+2. **Analysis**: The backend parses the SRT file and finds gaps >30 seconds
+3. **Results**: View break opportunities with timing and duration
+4. **Break Planning**: Use the results to plan your movie watching breaks
 
-## Development
+## 🛠️ Technology Stack
 
-### Backend Development
+- **Backend**: FastAPI, Python 3.13
+- **Frontend**: Next.js 14, React, Tailwind CSS
+- **UI Components**: Custom components with Lucide React icons
+- **Deployment**: Render (configured)
 
-The backend is built with FastAPI and provides:
-- CORS support for frontend integration
-- Pydantic models for request/response validation
-- Simulated useless data generation
-- Health check endpoints
+## 📝 License
 
-### Frontend Development
+This project is open source and available under the MIT License.
 
-The frontend is built with:
-- **Next.js 14** with App Router
-- **Tailwind CSS** for styling
-- **Lucide React** for icons
-- **Custom UI components** built with shadcn/ui patterns
-
-### Key Features
-
-- **"use client"** directive for client-side interactivity
-- **Responsive design** that works on all devices
-- **Loading states** and error handling
-- **Mock data fallback** when API is unavailable
-- **Beautiful gradients** and animations
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+4. Submit a pull request
 
-## License
+## 📞 Support
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Disclaimer
-
-This tool is designed for entertainment purposes only. All analysis results are completely meaningless and serve no practical purpose. Congratulations on successfully wasting your time! 🎉
+If you encounter any issues or have questions, please open an issue on GitHub.
 
 ---
 
-Made with ❤️ and absolutely zero practical purpose 
+**Made with ❤️ and perfect timing for breaks** 
